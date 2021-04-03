@@ -11,14 +11,14 @@ pipeline {
               git ‘https://github.com/pydevlab/homework14.git’
           }
       }
-      stage(‘Building Docker Image’) {
+      stage(‘Building image’) {
           steps{
               script {
                   dockerImage = docker.build registry + “:$BUILD_NUMBER”
               }
          }
       }
-      stage(‘Push Image to Docker Hub ‘) {
+      stage(‘Deploy image ‘) {
           steps{
               script {
                   docker.withRegistry( ‘’, registryCredential ) {
