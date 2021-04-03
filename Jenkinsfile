@@ -6,19 +6,19 @@ pipeline {
   }
   agent any
   stages {
-      stage(‘Cloning git repository’) {
+      stage('Cloning git repository') {
           steps {
               git ‘https://github.com/pydevlab/homework14.git’
           }
       }
-      stage(‘Building image’) {
+      stage('Building image') {
           steps{
               script {
                   dockerImage = docker.build registry + “:$BUILD_NUMBER”
               }
          }
       }
-      stage(‘Deploy image ‘) {
+      stage('Push image to DockerHub‘) {
           steps{
               script {
                   docker.withRegistry( ‘’, registryCredential ) {
